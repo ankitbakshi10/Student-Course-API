@@ -5,6 +5,7 @@
 </head>
 <body>
   <h1>Create Student</h1>
+
   <form id="studentForm">
     <input type="text" placeholder="Name" id="name" required />
     <input type="email" placeholder="Email" id="email" required />
@@ -30,11 +31,8 @@
         });
 
         if (!res.ok) throw new Error('Failed to create student');
-
         const json = await res.json();
         alert('✅ Student Created: ' + json.name);
-
-        // Reset form
         document.getElementById('studentForm').reset();
       } catch (err) {
         alert('❌ Error: ' + err.message);
