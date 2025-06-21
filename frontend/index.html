@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head><title>Student Course Manager</title></head>
+<head>
+  <title>Student Course Manager</title>
+</head>
 <body>
   <h1>Create Student</h1>
   <form id="studentForm">
@@ -10,21 +12,34 @@
   </form>
 
   <script>
-    const form = document.getElementById('studentForm');
-    form.onsubmit = async (e) => {
+    const API_URL = 'https://student-course-api-vxk9.onrender.com/api/students'; 
+
+    document.getElementById('studentForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const data = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value
       };
-      const res = await fetch('http://localhost:5000/api/students', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      const json = await res.json();
-      alert('Student Created: ' + json.name);
-    }
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (!res.ok) throw new Error('Failed to create student');
+
+        const json = await res.json();
+        alert('✅ Student Created: ' + json.name);
+
+        // Reset form
+        document.getElementById('studentForm').reset();
+      } catch (err) {
+        alert('❌ Error: ' + err.message);
+      }
+    });
   </script>
 </body>
 </html>
