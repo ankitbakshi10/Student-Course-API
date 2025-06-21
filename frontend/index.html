@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head><title>Student Course Manager</title></head>
+<body>
+  <h1>Create Student</h1>
+  <form id="studentForm">
+    <input type="text" placeholder="Name" id="name" required />
+    <input type="email" placeholder="Email" id="email" required />
+    <button type="submit">Create</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('studentForm');
+    form.onsubmit = async (e) => {
+      e.preventDefault();
+      const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value
+      };
+      const res = await fetch('http://localhost:5000/api/students', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const json = await res.json();
+      alert('Student Created: ' + json.name);
+    }
+  </script>
+</body>
+</html>
