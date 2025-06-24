@@ -20,8 +20,8 @@ Student-Course-API/
 │   │   └── studentModel.js
 │   │
 │   ├── routes/
-│   │   |── studentRoutes.js
-|   |   └── courseRoutes.js
+│   │   │── studentRoutes.js
+│   │   └── courseRoutes.js
 │   │
 │   ├── tests/                       
 │   │   ├── api/
@@ -197,12 +197,16 @@ npm test
 npm test -- --coverage
 ```
 
+---
+
 ## 📊 Test Coverage Report 
 
 ![Test coverage report screenshot](Test-report.png)
 
+---
+
 ## 📬 Contact
 Made by **Ankit Bakshi**
-**Email:** [bakshiankit1005@gmail.com](bakshiankit1005@gmail.com)
-**GitHub:** @ankitbakshi10
+- **Email:** [bakshiankit1005@gmail.com](bakshiankit1005@gmail.com)
+- **GitHub:** @ankitbakshi10
 
