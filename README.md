@@ -185,6 +185,16 @@ Ensure the API_URL in the <script> section is pointing to your live or local bac
 
 ---
 
+### 🧰 Testing Tools Used
+
+| Tool                   | Purpose                                  |
+|------------------------|------------------------------------------|
+| **Jest**               | JavaScript testing framework             |
+| **Supertest**          | Testing HTTP requests/responses          |
+| **mongodb-memory-server** | In-memory MongoDB for integration testing |
+
+---
+
 ## 📦 Run All Tests
 
 ```bash
