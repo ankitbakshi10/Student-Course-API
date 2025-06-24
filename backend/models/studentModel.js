@@ -1,9 +1,25 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
+// Ensure the Course model is registered before using .populate('enrolledCourses')
+require("./courseModel");
 
 const studentSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  enrolledCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course' }]
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  enrolledCourses: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course"
+  }]
 });
 
-module.exports = mongoose.model('Student', studentSchema);
+const Student = mongoose.model("Student", studentSchema);
+
+module.exports = Student;
