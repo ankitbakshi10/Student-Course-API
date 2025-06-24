@@ -1,22 +1,35 @@
-const express = require('express');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const connectDB = require('./config/db');
+const express = require("express");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const studentRoutes = require("./routes/studentRoutes");
 
 dotenv.config();
+
 const app = express();
-
-// Connect to MongoDB
-connectDB();
-
-// Middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 // Routes
-app.use('/api/students', require('./routes/studentRoutes'));
-app.use('/api/courses', require('./routes/courseRoutes'));
+app.use("/api/students", studentRoutes);
 
-// Server
+// Port setup
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Avoid starting the server when running tests
+if (process.env.NODE_ENV !== "test") {
+  mongoose
+    .connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`✅ Server running on port ${PORT}`);
+      });
+    })
+    .catch((err) => console.error("❌ MongoDB connection error:", err));
+}
+
+// Export app for testing
+module.exports = app;
