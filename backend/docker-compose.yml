@@ -1,0 +1,23 @@
+services:
+  app:
+    image: node:18
+    container_name: student-api
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "5000:5000"
+    command: ./entrypoint.sh
+    env_file:
+      - .env
+
+  keploy:
+    image: ghcr.io/keploy/keploy:latest
+    container_name: keploy
+    network_mode: "service:app"
+    environment:
+      - KEPLOY_MODE=record
+      - KEPLOY_APP_CMD=npm start
+      - KEPLOY_APP_PORT=5000
+    volumes:
+      - .:/app

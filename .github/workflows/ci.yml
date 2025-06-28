@@ -1,0 +1,46 @@
+name: Keploy API Test CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  keploy-api-tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Dependencies
+      run: |
+        cd backend
+        npm install
+
+    - name: Start Application
+      run: |
+        cd backend
+        npm start &
+        sleep 10
+
+    - name: Install Keploy CLI
+      run: |
+        curl --silent -L https://keploy.io/ent/install.sh | bash
+
+    - name: Run Keploy Test Suite
+      run: |
+        export KEPLOY_API_KEY=${{ secrets.KEPLOY_API_KEY }}
+        keploy test-suite --app=7f691eaa-8d2d-435e-8c7c-fe24147b398e --base-path https://student-course-api-vxk9.onrender.com --cloud
