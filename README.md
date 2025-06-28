@@ -10,6 +10,40 @@ A simple RESTful API for managing student records, built with Node.js, Express, 
 
 ---
 
+## 📂 Folder Structure
+
+```bash
+Student-Course-API/
+├── backend/
+│   ├── models/
+│   │   ├── courseModel.js
+│   │   └── studentModel.js
+│   │
+│   ├── routes/
+│   │   │── studentRoutes.js
+│   │   └── courseRoutes.js
+│   │
+│   ├── tests/                       
+│   │   ├── api/
+│   │   │   └── student.test.js      
+│   │   ├── integration/
+│   │   │   └── student.integration.test.js  
+│   │   └── unit/
+│   │       └── studentModel.test.js         
+│   │
+│   ├── .env                         
+│   ├── .gitignore                 
+│   ├── package.json                
+│   └── server.js                                     
+│
+├── frontend/
+│   └── index.html                  
+│
+└── README.md                                          
+```
+
+---
+
 ## 📌 API Endpoints and Functionality
 
 | Method | Endpoint                      | Description                  |
@@ -124,6 +158,65 @@ Ensure the API_URL in the <script> section is pointing to your live or local bac
 - dotenv
 - CORS
 
-## Author
-@ankitbakshi10
+## 🧪 Testing (3 Types of Tests Written)
+
+### ✅ 1. Unit Tests (`tests/unit/studentModel.test.js`)
+
+- **What it does:** Tests the structure and behavior of the Mongoose `Student` model.
+- **Checks:** Whether the model can be instantiated with required fields (`name`, `email`).
+- **Why:** Ensures schema logic works before any DB or API logic is tested.
+
+### ✅ 2. Integration Tests (`tests/integration/student.integration.test.js`)
+
+- **What it does:** Uses `mongodb-memory-server` to test database interaction without touching the real DB.
+- **Checks:**
+    - Saving a student to the database
+    - Retrieving a student from the database
+- **Why:** Validates that Mongoose and MongoDB work as expected together.
+
+### ✅ 3. API Tests (`tests/api/student.test.js`)
+
+- **What it does:** Tests actual API endpoints via HTTP requests using `Supertest`.
+- **Checks:**
+    - `GET /api/students` returns all students
+    - `POST /api/students` creates a new student
+    - Error handling for invalid requests (e.g., missing fields)
+- **Why:** Ensures your external API is functioning correctly and returns expected HTTP responses.
+
+---
+
+### 🧰 Testing Tools Used
+
+| Tool                   | Purpose                                  |
+|------------------------|------------------------------------------|
+| **Jest**               | JavaScript testing framework             |
+| **Supertest**          | Testing HTTP requests/responses          |
+| **mongodb-memory-server** | In-memory MongoDB for integration testing |
+
+---
+
+## 📦 Run All Tests
+
+```bash
+npm test
+```
+
+## 📈 Run with Coverage Report
+
+```bash
+npm test -- --coverage
+```
+
+---
+
+## 📊 Test Coverage Report 
+
+![Test coverage report screenshot](Test-report.png)
+
+---
+
+## 📬 Contact
+Made by **Ankit Bakshi**
+- **Email:** [bakshiankit1005@gmail.com](bakshiankit1005@gmail.com)
+- **GitHub:** @ankitbakshi10
 
