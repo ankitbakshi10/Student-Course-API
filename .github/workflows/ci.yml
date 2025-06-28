@@ -23,6 +23,4 @@ jobs:
           KEPLOY_API_KEY: ${{ secrets.KEPLOY_API_KEY }}
         run: |
           keploy test-suite \
-            --app=7f691eaa-8d2d-435e-8c7c-fe24147b398e \
-            --base-path=https://student-course-api-vxk9.onrender.com \
-            --cloud
+            --app=7f691eaa-8d2d-435e-8c7c-fe24147b398e --base-path https://student-course-api-vxk9.onrender.com --cloud
